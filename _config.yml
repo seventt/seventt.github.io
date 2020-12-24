@@ -5,9 +5,9 @@ description: "never too late to learn"
 baseurl: ""
 url: "http://seventt.github.io"
 github_username: seventt
-linkedin_username: feng-zhu-941507104
-linkedin_real_name: Feng Zhu
 github_real_name: Feng Zhu
+#linkedin_username: feng-zhu-941507104
+#linkedin_real_name: Feng Zhu
 
 # Build settings
 markdown: kramdown
