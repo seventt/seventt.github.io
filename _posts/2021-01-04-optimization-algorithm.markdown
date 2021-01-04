@@ -4,6 +4,7 @@ comments: true
 title:  "optimization algorithm for neural network"
 excerpt: "A brief introduction of gradient descent optimization algorithms"
 date:   2021-01-04 15:00:00
+mathjax: true
 ---
 
 ### SGD
