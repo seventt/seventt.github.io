@@ -11,16 +11,12 @@ date:   2021-01-04 15:00:00
 Stochastic Gradient Descent is a simple optimization method to minimize the cost function.
 
 $$
-\begin{align}
+\begin{equation}
 \theta_{i+1} = \theta_i - \eta g_t
-\end{align}
+\end{equation}
 $$
 
-The disadvantage of SGD is: 
-
-- slow speed of convergence
-
-- oscillation at saddle point
+The disadvantage of SGD is the slow speed of convergence and oscillation at saddle point
 
 ### momentum
 
