@@ -20,7 +20,8 @@ The disadvantage of SGD is the slow speed of convergence and oscillation at sadd
 
 ### Momentum
 
-The next update is not only dependent on the current gradient but also the previous gradients.
+The next update is not only dependent on the current gradient but also the previous gradients. This leads to a bigger update 
+when current gradient is very small.
 
 $$
 \begin{align}
