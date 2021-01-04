@@ -68,9 +68,11 @@ v_t = \beta_2 v_{t-1} + (1-\beta_2) g_t^2 \\
 \end{equation}
 $$
 
+final equation for computing parameter update is as following:
 $$
 \begin{equation}
-\theta_{t+1} = \theta_t - \frac{\eta}{\sqrt{{\hat{v}}_t}+\epsilon} {\hat{m}}_t
+tmp = \sqrt{\frac{v_t}{1-\beta_2^t}} \\
+\theta_{t+1} = \theta_t - \frac{\eta}{tmp+\epsilon} {\hat{m}}_t
 \end{equation}
 $$
 
