@@ -19,14 +19,14 @@ $$
 
 The disadvantage of SGD is the slow speed of convergence and oscillation at saddle point
 
-### momentum
+### Momentum
 
 The next update is not only dependent on the current gradient but also the previous gradients.
 
 $$
 \begin{align}
 m_{i+1} = \gamma m_i + \eta g_t \\
-\theta_{i+1} = theta_i - m_{i+1}
+\theta_{i+1} = \theta_i - m_{i+1}
 \end{align}
 $$
 
@@ -37,7 +37,7 @@ It adapts the learning rate to the parameters, performing smaller updates
 
 $$
 \begin{align}
-\theta_{t+1,i} = theta_{t,i} - \frac{\eta}{\sqrt{G_{t,ii}+\epsilon}} g_t
+\theta_{t+1,i} = \theta_{t,i} - \frac{\eta}{\sqrt{G_{t,ii}+\epsilon}} g_t
 \end{align}
 $$
 
@@ -49,8 +49,8 @@ RMSprop as well divides the learning rate by an exponentially decaying average o
 
 $$
 \begin{align}
-\G_{t,ii} = \gamma \G_{t-1,ii} + (1-\gamma) g_t^2
-\theta_{t+1,i} = theta_{t,i} - \frac{\eta}{\sqrt{G_{t,ii}+\epsilon}} g_t
+G_{t,ii} = \gamma G_{t-1,ii} + (1-\gamma) g_t^2 \\
+\theta_{t+1,i} = \theta_{t,i} - \frac{\eta}{\sqrt{G_{t,ii}+\epsilon}} g_t
 \end{align}
 $$
 
@@ -63,8 +63,8 @@ $$
 \begin{align}
 m_t = \beta_1 m_{t-1} + (1-\beta_1) g_t \\
 v_t = \beta_2 v_{t-1} + (1-\beta_2) g_t^2 \\
-\hat{m_t} = frac{m_t}{1-\beta_1^t} \\
-\hat{v_t} = frac{v_t}{1-\beta_2^t} \\
+\hat{m_t} = \frac{m_t}{1-\beta_1^t} \\
+\hat{v_t} = \frac{v_t}{1-\beta_2^t} \\
 \theta_{t+1} = theta_{t} - \frac{\eta}{\sqrt{\hat{v_t}}+\epsilon}} \hat{m_t}
 \end{align}
 $$
