@@ -65,9 +65,13 @@ m_t = \beta_1 m_{t-1} + (1-\beta_1) g_t \\
 v_t = \beta_2 v_{t-1} + (1-\beta_2) g_t^2 \\
 {\hat{m}}_t = \frac{m_t}{1-\beta_1^t} \\
 {\hat{v}}_t = \frac{v_t}{1-\beta_2^t} \\
-\theta_{t+1} = \theta_t - \frac{\eta}{\sqrt{{\hat{v}}_t} + \epsilon}} {\hat{m}}_t
+\end{equation}
+$$
+
+$$
+\begin{equation}
+\theta_{t+1} = \theta_t - \frac{\eta}{\sqrt{{\hat{v}}_t}+\epsilon} {\hat{m}}_t
 \end{equation}
 $$
 
 Generally, \\( \beta_1\\) is 0.9 and \\( \beta_2\\) is 0.999 and \\( \epsilon\\) is 10e-8.
-
