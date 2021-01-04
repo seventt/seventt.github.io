@@ -62,14 +62,11 @@ like AdaGrad and RMSprop, Adam also keeps an exponentially decaying average of p
 $$
 \begin{equation}
 m_t = \beta_1 m_{t-1} + (1-\beta_1) g_t \\
-v_t = \beta_2 v_{t-1} + (1-\beta_2) g_t^2 \\
-\hat{m_t} = \frac{m_t}{1-\beta_1^t} \\
-\hat{v_t} = \frac{v_t}{1-\beta_2^t} \\
-\theta_{t+1} = \theta_t - \frac{\eta}{\sqrt{\hat{v_t}}+\epsilon}} \hat{m_t}
+v_t = \beta_2 v_{t-1} + (1-\beta_2) g_t^2 
 \end{equation}
 $$
 
-Generally, \\( \beta_1\\) is 0.9 and \\( \beta_2\\) is 0.99
+Generally, \\( \beta_1\\) is 0.9 and \\( \beta_2\\) is 0.999 and \\( \epsilon\\) is 10e-8.
 
 
 
