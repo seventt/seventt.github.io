@@ -1,6 +1,5 @@
 ---
 layout: post
-comments: true
 title:  "optimization algorithm for neural network"
 excerpt: "A brief introduction of gradient descent optimization algorithms"
 date:   2021-01-04 15:00:00
@@ -69,6 +68,7 @@ v_t = \beta_2 v_{t-1} + (1-\beta_2) g_t^2 \\
 $$
 
 final equation for computing parameter update is as following:
+
 $$
 \begin{equation}
 tmp = \sqrt{\frac{v_t}{1-\beta_2^t}} \\
