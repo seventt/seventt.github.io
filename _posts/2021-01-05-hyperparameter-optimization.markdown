@@ -7,7 +7,7 @@ mathjax: true
 ---
 
 In machine learning, hyperparameters (like learning rate, batch size, dropout rate, the number of layers and so on) need to be chosen deliberately before starting the training process,
-which aims to get a model with the best performance. For different tasks sucn as regression and classification, there are different metrics to measure which combination of hyperparameters is desired and outperformed by cross-validation on the training set or evaluation on a held-out validation set.
+which aims to get a model with the best performance. For different tasks such as regression and classification, there are different metrics to measure which combination of hyperparameters is desired and outperformed by cross-validation on the training set or evaluation on a held-out validation set.
 
 **Grid Search** is simply an exhaustive searching through a manually specified subset of the hyperparameter space.
 
