@@ -14,12 +14,11 @@ The computation of rank of pages is described as the following equation:
 
 $$
 \begin{equation}
-PR(p_i) = \frac{1-d}{N} + d \sum_{p_j \in M(p_i)} \frac{PR(p_j)}{L(p_j)} \newline
-M(p_i): \text{the pages that link to} \; p_i \newline
-L(p_j): \text{the number of outbound links on page } p_j \newline
-N:\text{the number of total pages} \newline
-d:\text{damping factor \;(continue to click on this page)} \newline
-\text{the initial probability of all pages is set to}: \frac{1}{N}
+PR(p_i) = \frac{1-d}{N} + d \sum_{p_j \in M(p_i)} \frac{PR(p_j)}{L(p_j)} \\
+M(p_i): \text{the pages that link to} \; p_i \\
+L(p_j): \text{the number of outbound links on page } p_j \\
+N:\text{the number of total pages} \\
+d:\text{damping factor \;(continue to click on this page)} 
 \end{equation}
 $$
 
@@ -52,18 +51,9 @@ l(p_N,p_1) & l(p_N,p_2) & \dots & l(p_N,p_N)
 \end{equation}
 $$
 
+the initial probability of all pages is set to \\( \frac{1}{N}\\) 
 
 ### 2.BM25
-
-$$
-\begin{equation}
-PR(p_i) = \frac{1-d}{N} + d \sum_{p_j \in M(p_i)} \frac{PR(p_j)}{L(p_j)} \newline
-M(p_i): \text{the pages that link to} \; p_i \newline
-L(p_j): \text{the number of outbound links on page } p_j \newline
-N:\text{the number of total pages} \newline
-d:\text{damping factor \;(continue to click on this page)}
-\end{equation}
-$$
 
 ### 3.Learning To Rank
 
