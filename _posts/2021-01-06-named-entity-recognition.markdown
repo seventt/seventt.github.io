@@ -2,7 +2,7 @@
 layout: post
 title:  "named entity recognition methods"
 excerpt: "Short summary of NER: HMM, CRF, BI-LSTM, BI-LSTM-CRF, BERT-BI-LSTM-CRF"
-date:   2021-01-06 17:00:00
+date:   2021-01-07 17:00:00
 mathjax: true
 ---
 
