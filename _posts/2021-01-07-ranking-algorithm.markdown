@@ -63,7 +63,7 @@ $$
 \begin{equation}
 score(D,Q) = \sum_{1}^{n} IDF(q_i) \cdot \frac{f(q_i, D) \cdot (k_1 + 1)} {f(q_i, D) + k_1 \cdot (1-b+b\cdot \frac{\mid D \mid}{avgdl})} \\
 \text{inverse document frequency is to weight the words that common words have less weight:} \quad IDF(q_i) = \log (\frac{N-n(q_i)+0.5}{n(q_i)+0.5} + 1) \\ 
-n(q_i): \text{the number of documents containing query} \quad q_i\\
+n(q_i): \text{the number of documents containing query} \, q_i\\
 f(q_i, D): \text{term frequency:}\\
 k_1 \in (1.2,2.0):\text{constraints on the term frequency} \\
 b=0.75:\text{constraints on the document length}
@@ -71,6 +71,7 @@ b=0.75:\text{constraints on the document length}
 $$
 
 ### 3.Learning To Rank
+
 
 #### 3.1.Pointwise
 
