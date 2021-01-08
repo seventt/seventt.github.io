@@ -42,16 +42,20 @@ CRF layer is put on top of BI-LSTM to lay constraints between output labels by a
 
 ### BERT-BI-LSTM-CRF
 
-Compared to the BI-LSTM, BERT model has stronger ability of feature extraction and representation. BERT is composed of transformers encoder block and use multi self-attention layer to replace 
-traditional RNN structure to mine the contextual relation. In additional, it applies large unlabelled data set to pre-train the neural network on the tasks: Masked Language Model (MLM) and Next Sentence Prediction (NSP)
+Compared to the BI-LSTM, **BERT** (Bidirectional Encoder Representations from Transformers) model has stronger ability of feature extraction and representation. BERT is composed of transformers encoder block and use multi self-attention layer to replace 
+traditional RNN structure to mine the contextual relation. In additional, it applies large unlabelled data set to pre-train the neural network on the tasks: **Masked Language Model** (MLM) and **Next Sentence Prediction** (NSP)
+
+BERT pretraining:
 
 <div class="imgcap">
 <img src="/assets/NER/BERT_pretrain.png">
 <div class="thecap"> pretraining of bert: MLM (masked language model) and NSP (next sentence prediction).</div>
 </div>
 
+BERT fine-tuning:
+
 <div class="imgcap">
-<img src="/assets/NER/BERT_finetuning.png">
+<img src="/assets/NER/BERT_finetuing.png">
 <div class="thecap"> fine-tuning of BERT on the downstream tasks: NER, QA, text classification and sentence pair classification.</div>
 </div>
 
