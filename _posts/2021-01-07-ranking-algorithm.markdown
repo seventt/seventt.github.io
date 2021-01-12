@@ -80,7 +80,7 @@ The drawback is that plenty of human labelling is expensive.
 #### 3.2.Pairwise
 
 For the pair \\( (query_k, doc_i, doc_j)\\), the label is 1 if the relevance between \\( query_k \\) and \\( doc_i \\) is closer than the relevance between \\( query_k \\) and \\( doc_j \\), otherwise, the label is 0, which can be set by the search log
-This means takes the relevant importance of different documents related to the query. Typical model is RankNet, LambdaRank and LambdaMART.
+This means considers the relevant importance of different documents related to the query. Typical model is RankNet, LambdaRank and LambdaMART.
 
 **RankNet:** the output of model is \\( s_i, s_j\\) and  \\(P(rank(i) > rank(j)) \\) is the probability of the relevance of \\( (query_k, doc_i)\\) is larger compared to \\( (query_k, doc_j)\\).
 
@@ -151,32 +151,9 @@ There are some metrics to evaluate the performance of the ranking model.
 $$
 \begin{equation}
 MAP=\frac{\sum_{q=1}^{Q} AveP(q)}{Q} \newline
-\newline
 AveP = \frac{\sum_{i=1}^{n} P(K) rel(K)}{\text{number of relevant documents}}
 \end{equation}
 $$
-
-example:
-
-\begin{center}
-\begin{tabular}{ |c|c|c| } 
- \hline
- model prediction & is relevant & P(K)*rel(K) \\ 
- \hline
- 1 & 1 & 1/1 * 1 \\ 
- \hline
- 2 & 1 & 2/2 * 1 \\ 
- \hline
-  3 & 0 & 2/3 * 0 \\ 
- \hline
-  4 & 0 & 2/4 * 0 \\ 
- \hline
-  5 & 1 & 3/5 * 1 \\ 
- \hline
-  6 & 0 & 3/6 * 0 \\ 
- \hline
-\end{tabular}
-\end{center}
 
 #### 4.2.NDCG
 
@@ -193,6 +170,7 @@ $$
 
 $$
 \begin{equation}
+DCG@T = \sum_{i=1}^{T} \frac{2^{l_i}-1}{\log(1+i)} \newline
 T: \text{the former T predicted results} \newline
 l_i: \text{the actual score of document}\newline
 i: \text{the position of document in the predicted results}
@@ -208,9 +186,7 @@ $$
 ### 5.Reference
 
 [PageRank](https://en.wikipedia.org/wiki/PageRank)
-
 [BM25](https://en.wikipedia.org/wiki/Okapi_BM25)
-
 [NDCG](https://en.wikipedia.org/wiki/Discounted_cumulative_gain)
 
 
