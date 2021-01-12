@@ -177,7 +177,7 @@ $$
 
 $$
 \begin{equation}
-DCG@T = \sum_{i=1}^{T} \frac{2^{l_i}-1}{\log(1+i)} \newline
+DCG@T = \sum_{i=1}^{T}\frac{2^{l_i}-1}{\log(1+i)} 
 \end{equation}
 $$
 
