@@ -192,7 +192,9 @@ $$
 ### 5.Reference
 
 [PageRank](https://en.wikipedia.org/wiki/PageRank)
+
 [BM25](https://en.wikipedia.org/wiki/Okapi_BM25)
+
 [NDCG](https://en.wikipedia.org/wiki/Discounted_cumulative_gain)
 
 
