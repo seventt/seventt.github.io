@@ -150,7 +150,14 @@ There are some metrics to evaluate the performance of the ranking model.
 
 $$
 \begin{equation}
-MAP=\frac{\sum_{q=1}^{Q} AveP(q)}{Q} \newline
+MAP=\frac{\sum_{q=1}^{Q}AveP(q)}{Q}
+\end{equation}
+$$
+
+average precision is:
+
+$$
+\begin{equation}
 AveP = \frac{\sum_{i=1}^{n} P(K) rel(K)}{\text{number of relevant documents}}
 \end{equation}
 $$
@@ -171,11 +178,10 @@ $$
 $$
 \begin{equation}
 DCG@T = \sum_{i=1}^{T} \frac{2^{l_i}-1}{\log(1+i)} \newline
-T: \text{the former T predicted results} \newline
-l_i: \text{the actual score of document}\newline
-i: \text{the position of document in the predicted results}
 \end{equation}
 $$
+
+\\( T \\) is the former T predicted results; \\( l_i \\) is the actual score of document; and \\( i \\) is the position of document in the predicted results
 
 **Ideal Discounted Cumulative Gain(IDCG):** the value of DCG when the model has the optimal ranking. 
 
