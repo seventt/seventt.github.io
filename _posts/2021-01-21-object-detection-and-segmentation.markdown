@@ -53,7 +53,7 @@ To overcome the drawbacks of R-CNN, the Fast R-CNN is proposed.
 
 #### 1.3.Faster R-CNN
 
-It is composed of two modules. The first module is a deep fully convolutional network that proposes regions, and the second module is the Fast R-CNN detector that uses the proposed regions.
+It is composed of **two modules**. The first module is a deep fully convolutional network that proposes regions, and the second module is the Fast R-CNN detector that uses the proposed regions.
 It replaces the time-consumed selective search method with using the **region proposal network (RPN)** to get the probable region of interest.
 
 The architecture of Faster R-CNN is demonstrated as follows:
@@ -69,7 +69,7 @@ We can define some anchor boxes to slide on each point of the feature map. For t
 The structure of RPN is depicted as following picture:
 
 <div class="imgcap">
-<img src="/assets/detection/RPN.png">
+<img src="/assets/detection/rpn.png">
 <div class="thecap">Region Proposal Network.</div>
 </div>
 
