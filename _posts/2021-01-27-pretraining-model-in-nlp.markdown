@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "pre-training model in NLP"
-excerpt: "from word embeddings to pre-training model based on large-scale data set to better capture and represent the contextual information including Word2Vec, ELMo, Transformer, GPT, BERT and ERNIE"
+excerpt: "from word embeddings to pre-training model based on large-scale data set to better capture and represent the contextual information including Word2Vec, ELMo, Transformer, GPT, BERT, XLNet and ERNIE"
 date:   2021-01-27 17:00:00
 mathjax: true
 ---
@@ -174,6 +174,13 @@ The process of MLM is:
 - for these masked words: 80% of them is replaced with the symbol \\( MASK \\); 10% of them keeps same; and the rest 10% is substituted with one random word.
 - The corresponding reason for above step: keep the consistency of input data distribution for training and test period; force model to predict using contextual information; give the model a little ability of error-correction.
 
+The input embedding of BERT is composed of three parts: token embedding, segment embedding and position embedding.
+
+<div class="imgcap">
+<img src="/assets/bert/bert-embedding.png">
+<div class="thecap">The input embedding of BERT.</div>
+</div>
+
 The Pre-training process of BERT:
 
 <div class="imgcap">
@@ -190,9 +197,58 @@ The fine-tuning process of BERT on the downstream NLP tasks:
 
 ### 6.ERNIE
 
+**Enhanced Representation from kNowledge IntEgration (ERNIE)** is designed to learn language representation enhanced by **knowledge masking strategies**, 
+which includes **entity-level masking** and **phrase-level masking**. Entity-level strategy masks entities which are usually composed of multiple words. 
+Phrase-level strategy masks the whole phrase which is composed of several words standing together as a conceptual unit.
+ERNIE achieves the state-of-the-art results on some Chinese NLP tasks.
 
+The different masking strategy between BERT and ERNIE:
 
+<div class="imgcap">
+<img src="/assets/bert/ernie-mask.png">
+<div class="thecap">The different masking strategy between BERT and ERNIE.</div>
+</div>
 
+ERNIE models the Query-Response dialogue structure on the **DLM (Dialogue Language Model)** task. 
+The model is designed to **judge whether the multi-turn conversation is real or fake**. 
+we generate fake samples by replacing the query or the response with a randomly selected sentence.
+The model architecture of DLM task is compatible with that of the MLM task.
+
+<div class="imgcap">
+<img src="/assets/bert/ernie-dlm.png">
+<div class="thecap">The Dialogue Language Model of ERNIE.</div>
+</div>
+
+**ERNIE 2.0** is a **continual pre-training framework** which incrementally builds pre-training tasks and then
+learn pre-trained models on these constructed tasks via **continual multi-task learning** by capturing a wide range of 
+valuable lexical, syntactic and semantic information in the training data.
+
+The framework of ERNIE 2.0 is:
+
+<div class="imgcap">
+<img src="/assets/bert/ernie2-pretraining.png">
+<div class="thecap">The framework of ERNIE 2.0.</div>
+</div>
+
+The process of continual pre-training contains two steps. 
+Firstly, We continually construct unsupervised pre-training tasks with big data and prior knowledge involved. 
+There are different kinds of pre-training tasks including **word-aware, structure-aware and semantic-aware tasks**.
+**7** pre-training tasks belonging to different kinds are constructed in the
+ERNIE 2.0 model.
+
+The model architecture of ERNIE 2.0 is:
+
+<div class="imgcap">
+<img src="/assets/bert/ernie2-pretraining.png">
+<div class="thecap">The model of ERNIE 2.0.</div>
+</div>
+
+As we see, the input embedding of ERNIE 2.0 contains the token embedding, the sentence embedding,the position embedding and **the task embedding**. 
+
+Secondly,We incrementally update the ERNIE model via continual multi-task learning without forgetting the knowledge learned before.
+Whenever a new task comes, the continual multi-task learning method first uses the previously learned parameters to initialize the model, 
+and then train the newly-introduced task together with the original tasks simultaneously **by automatically allocating each task N
+training iterations to the different stages of training**.
 
 ### 7.Reference
 
@@ -212,6 +268,6 @@ The fine-tuning process of BERT on the downstream NLP tasks:
 
 [huggingface-transformers](https://github.com/huggingface/transformers)
 
-
+[ERNIE](https://github.com/PaddlePaddle/ERNIE)
 
 
