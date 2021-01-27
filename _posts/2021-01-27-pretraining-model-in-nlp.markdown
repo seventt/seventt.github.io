@@ -1,18 +1,19 @@
 ---
 layout: post
 title:  "pre-training model in NLP"
-excerpt: "from word embeddings to pre-training model based on large-scale data set to better capture and represent the contextual information"
+excerpt: "from word embeddings to pre-training model based on large-scale data set to better capture and represent the contextual information including Word2Vec, ELMO, GPT, BERT and ERNIE"
 date:   2021-01-27 17:00:00
 mathjax: true
 ---
 
-
+The technique of word embedding method and pre-training model is to get the vector representation of word by exploiting the contextual information of word or sentence as accurately as possible. These numerical value of
+vector representation can be subsequently used for the downstream NLP task.
 
 ### 1.Word2Vec
 
 Word2Vec is a method to learn the vector representation of word embedding from large datasets. 
 
-It uses the **Skip-gram Model** to predict words within a certain range before and after the current word in the same sentence
+It uses the **Continuous Skip-gram Model** to predict words within a certain range before and after the current word in the same sentence.
 **Continuous Bag-of-Words Model (CBOW)** is another mothod to train the model by predicting the middle word based on surrounding context words. The context consists of a few words before and after the current (middle) word.
 
 <div class="imgcap">
@@ -34,7 +35,7 @@ log probability
 
 $$
 \begin{equation}
-\frac{1}{T} \sum_{t=1}^{T} \sum_{-c \leq j \leq c, j \neq 0} log p(w_{t+j}|w_t)
+\frac{1}{T} \sum_{t=1}^{T} \sum_{-c \leq j \leq c, j \neq 0} \log p(w_{t+j}|w_t)
 \end{equation}
 $$
 
@@ -42,11 +43,11 @@ where \\(c\\) is the size of the training context.
 
 $$
 \begin{equation}
-p(w_{t+j}|w_t) = p(w_{O}|w_I)  = frac{e^{v_{w_O}^{'} v_{w_I}}}{\sum_{w=1}{W} e^{ v_w^{'} v_{w_I} }}
+p(w_{t+j}|w_t) = p(w_{O}|w_I)  = \frac{e^{v_{w_O}^{\prime} v_{w_I}}}{\sum_{w=1}^{W} e^{ v_w^{\prime} v_{w_I} }}
 \end{equation}
 $$
 
-where \\( v_w\\) and \\( v_w^{'}\\) are the input and output vector representation of \\( w \\), and \\( W\\) is the number of words in the vocabulary. 
+where \\( v_w\\) and \\( v_w^{\prime}\\) are the input and output vector representation of \\( w \\), and \\( W\\) is the number of words in the vocabulary. 
 the noticeable problem for this is **huge computation cost proportional to the number of 
 the word vocabulary for the Softmax function** . To cope with this disadvantage, **Noise Contrastive Estimation (NCE)** is proposed.
 
