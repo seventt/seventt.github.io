@@ -163,7 +163,30 @@ The process of fine-tuning is as follows:
 
 ### 5.BERT
 
-**BERT (Bidirectional Encoder Representation of Transformer)** is based on the **Transformer Encoder Block**.
+**BERT (Bidirectional Encoder Representation from Transformers)** is based on the **Transformer Encoder Block** unlike GPT. 
+It also uses the framework of unsupervised pra-training with large-scale unlabelled datasets and subsequent supervised fine-tuning on the specific downstream NLP tasks. 
+
+The Pre-training of BERT has two tasks: **Next Sentence Prediction (NSP)** to predict if two sentences are in right order and **Masked Language Model (MLM)** to predict the masked words in the input.
+
+The process of MLM is:
+
+- randomly mask approximately 15% words in one sentence 
+- for these masked words: 80% of them is replaced with the symbol \\( MASK \\); 10% of them keeps same; and the rest 10% is substituted with one random word.
+- The corresponding reason for above step: keep the consistency of input data distribution for training and test period; force model to predict using contextual information; give the model a little ability of error-correction.
+
+The Pre-training process of BERT:
+
+<div class="imgcap">
+<img src="/assets/bert/bert-pretraining.png">
+<div class="thecap">The Pre-training process of BERT.</div>
+</div>
+
+The fine-tuning process of BERT on the downstream NLP tasks:
+
+<div class="imgcap">
+<img src="/assets/bert/bert-finetuning.png">
+<div class="thecap">The fine-tuning process of BERT.</div>
+</div>
 
 ### 6.ERNIE
 
