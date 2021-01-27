@@ -231,7 +231,8 @@ The framework of ERNIE 2.0 is:
 </div>
 
 The process of continual pre-training contains two steps. 
-Firstly, We continually construct unsupervised pre-training tasks with big data and prior knowledge involved. 
+
+- Firstly, we continually construct unsupervised pre-training tasks with big data and prior knowledge involved. 
 There are different kinds of pre-training tasks including **word-aware, structure-aware and semantic-aware tasks**.
 **7** pre-training tasks belonging to different kinds are constructed in the
 ERNIE 2.0 model.
@@ -239,13 +240,13 @@ ERNIE 2.0 model.
 The model architecture of ERNIE 2.0 is:
 
 <div class="imgcap">
-<img src="/assets/bert/ernie2-pretraining.png">
+<img src="/assets/bert/ernie2-model.png">
 <div class="thecap">The model of ERNIE 2.0.</div>
 </div>
 
 As we see, the input embedding of ERNIE 2.0 contains the token embedding, the sentence embedding,the position embedding and **the task embedding**. 
 
-Secondly,We incrementally update the ERNIE model via continual multi-task learning without forgetting the knowledge learned before.
+- Secondly, we incrementally update the ERNIE model via continual multi-task learning without forgetting the knowledge learned before.
 Whenever a new task comes, the continual multi-task learning method first uses the previously learned parameters to initialize the model, 
 and then train the newly-introduced task together with the original tasks simultaneously **by automatically allocating each task N
 training iterations to the different stages of training**.
