@@ -64,14 +64,30 @@ After training, the vector representation of the words with similar semantic mea
 ### 2.ELMo
 
 **ELMo (Embeddings from Language Models)** is a deep contextualized word representation that models both complex characteristics of word use (e.g., syntax and semantics), a
-nd how these uses vary across linguistic contexts (i.e., to model polysemy). These word vectors are learned functions of the internal states of a deep bidirectional language model (biLM), 
+nd how these uses vary across linguistic contexts (i.e., to model polysemy). These word vectors are learned functions of the internal states of a deep bidirectional language model (**biLM**), 
 which is pre-trained on a large text corpus. They can be easily added to existing models and significantly improve the state of the art across a broad range of challenging NLP problems, including question answering, textual entailment and sentiment analysis.
+
+The architecture of ELMo is:
+
+<div class="imgcap">
+<img src="/assets/bert/elmo-network.jpg">
+<div class="thecap">The architecture of ELMo.</div>
+</div>
 
 ELMo representations are;
 
 - **Deep**: The word representations combine all layers of a deep pre-trained neural network.
 
 - **Contextual**: The representation for each word depends on the entire context in which it is used. Instead of using a fixed embedding for each word, ELMo looks at the entire sentence before assigning each word in it an embedding
+
+ELMo comes up with the contextualized embedding through grouping together the hidden states (and initial embedding) in a certain way (concatenation followed by weighted summation).
+
+<div class="imgcap">
+<img src="/assets/bert/elmo-embedding.png">
+<div class="thecap">The illustration of finalword embedding based on ELMo.</div>
+</div>
+
+the dynamic process to get deep contextualized word embedding is as following:
 
 <div class="imgcap">
 <img src="/assets/bert/elmo.gif">
@@ -97,5 +113,7 @@ ELMo representations are;
 [Word2vec](https://www.tensorflow.org/tutorials/text/word2vec)
 
 [ELMo](https://allennlp.org/elmo)
+
+[BERT,ELMo](http://jalammar.github.io/illustrated-bert/)
 
 
