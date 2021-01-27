@@ -106,8 +106,8 @@ The sequential nature of Recurrent models (RNN, LSTM) causes that the parallel c
 and the memory constraints limit the batching across training examples as the length of sequence becomes longer. 
 
 The Transformer substitutes the traditional attention mechanism using recurrent or convolutional neural networks in encoder and decoder with 
-the simple self-attention mechanism in the task - machine translation.
-It allows for significantly more parallelization with the help of **multi-headed self-attention mechanism**, in addition, it can also learn long-range dependency.
+the simple **multi-head self-attention mechanism** in the task - machine translation.
+It allows for significantly **more parallelization** for the single training example with the help of multi-headed self-attention mechanism, in addition, it can also learn **long-range dependency**.
 
 <div class="imgcap">
 <img src="/assets/bert/self-attention.png">
@@ -115,20 +115,50 @@ It allows for significantly more parallelization with the help of **multi-headed
 </div>
 
 The Transformer makes use of multi-headed self-attention to improve the performance of attention layer by concatenation of multi self-attention output result. Multi-head attention allows the model to jointly attend to information from different representation
-subspaces at different positions. In the decoder, We only need to keep leftward information flow of current input word by masking out all values in the input of the softmax which correspond to illegal connections.
+subspaces at different positions. In the decoder, We only need to keep leftward information flow of current input word by masking out all future token values in the input of the softmax which correspond to illegal connections.
+
+<div class="imgcap">
+<img src="/assets/bert/masked-self-attention.png">
+<div class="thecap">The illustration of masked self-attention in the decoder.</div>
+</div>
+
+The computation of masked self-attention in decoder is:
+
+<div class="imgcap">
+<img src="/assets/bert/masked-self-attention-computation.png">
+<div class="thecap">The illustration of computation of masked self-attention in the decoder.</div>
+</div>
 
 Since our model contains no recurrence and no convolution, in order for the model to make use of the
 order of the sequence, we must inject some information about the relative or absolute position of the tokens in the sequence.
 we add **positional encoding** to the input embeddings at the bottoms of the encoder and decoder stacks.
 
-
 ### 4.GPT
 
+GPT (Generative Pre-trained Transformer) is a unsupervised pre-training model trained on enormous, diverse and unlabelled corpus of text to further improve the natural language understanding performance in NLP, 
+followed by discriminative fine-tuning on each specific downstream task.
 
+It explores a semi-supervised approach for language understanding tasks using a **combination of unsupervised pre-training and supervised fine-tuning**. 
+Its goal is to learn a universal representation that transfers with little adaptation to a wide range of tasks such as text classification, question answering, sequence tagging, semantic similarity and so on. 
+This alleviates mostly the dependency on supervised learning with labelled data.
+
+It employs a two-stage training procedure:
+- First, for unsupervised pre-training, we use a language modeling objective on the unlabeled data to learn the initial parameters of a neural network model based on **Transformer Decoder Block** architecture. 
+- Subsequently, for supervised fine-tuning stage, we adapt these parameters to a target task using the corresponding supervised objective.
+
+The process of pre-training is predict the word based on its previous words and their contextual representation for one sentence same as the decoder process of Transformer.
+The way these models actually work is that after each token is produced, that token is added to the sequence of inputs. And that new sequence becomes the input to the model in its next step. This is an idea called **auto-regression**.
+
+The process of fine-tuning is as follows:
+
+<div class="imgcap">
+<img src="/assets/bert/gpt.png">
+<div class="thecap">The fine-tuning process of GPT.</div>
+</div>
 
 ### 5.BERT
 
-
+BERT (Bidirectional Encoder Representation of Transformer) is based on the **Transformer Encoder Block**.
 
 ### 6.ERNIE
 
