@@ -52,9 +52,9 @@ the noticeable problem for this is **huge computation cost proportional to the n
 the word vocabulary for the Softmax function** . To cope with this disadvantage, **Noise Contrastive Estimation (NCE)** is proposed, which uses **Negative Sampling** to sample 
 some negative samples for the input word according to one noise distribution instead of using all the words in the vocabulary to reduce the computation cost.
 
-After training, the vector representation of the words with similar semantic meaning will be more similar, in contrast, the vector representation of the words with different semantic meaning will be less similar.
-One problem is: there is one fixed vector representation for one word, so it is not suitable for synonym word,
-another is: Word2Vec takes less contextual information of current word into consideration, the representation is a little shallow,
+After training, the vector representation of the words with similar semantic meaning will be more close, in contrast, the vector representation of the words with different semantic meaning will be less similar.
+- One problem is: there is one fixed vector representation for one word, so it is not suitable for synonym word,
+- another is: Word2Vec takes less contextual information of current word into consideration, the representation is a little shallow,
 
 <div class="imgcap">
 <img src="/assets/bert/word2vec-ret.png">
