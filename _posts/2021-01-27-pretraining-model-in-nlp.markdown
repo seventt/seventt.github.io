@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "pre-training model in NLP"
-excerpt: "from word embeddings to pre-training model based on large-scale data set to better capture and represent the contextual information including Word2Vec, ELMO, GPT, BERT and ERNIE"
+excerpt: "from word embeddings to pre-training model based on large-scale data set to better capture and represent the contextual information including Word2Vec, ELMo, Transformer, GPT, BERT and ERNIE"
 date:   2021-01-27 17:00:00
 mathjax: true
 ---
@@ -63,8 +63,7 @@ After training, the vector representation of the words with similar semantic mea
 
 ### 2.ELMo
 
-**ELMo (Embeddings from Language Models)** is a deep contextualized word representation that models both complex characteristics of word use (e.g., syntax and semantics), a
-nd how these uses vary across linguistic contexts (i.e., to model polysemy). These word vectors are learned functions of the internal states of a deep bidirectional language model (**biLM**), 
+**ELMo (Embeddings from Language Models)** is a deep contextualized word representation that models both complex characteristics of word use (e.g., syntax and semantics), and how these uses vary across linguistic contexts (i.e., to model polysemy). These word vectors are learned functions of the internal states of a deep bidirectional language model (**biLM**), 
 which is pre-trained on a large text corpus. They can be easily added to existing models and significantly improve the state of the art across a broad range of challenging NLP problems, including question answering, textual entailment and sentiment analysis.
 
 The architecture of ELMo is:
@@ -74,7 +73,7 @@ The architecture of ELMo is:
 <div class="thecap">The architecture of ELMo.</div>
 </div>
 
-ELMo representations are;
+The characteristics of ELMo representations are;
 
 - **Deep**: The word representations combine all layers of a deep pre-trained neural network.
 
@@ -94,26 +93,67 @@ the dynamic process to get deep contextualized word embedding is as following:
 <div class="thecap">The illustration of ELMo.</div>
 </div>
 
-### 3.GPT
+### 3.Transformer
+
+The Transformer model based on encoder-decoder architecture was proposed in [Attention is All You Need](https://arxiv.org/pdf/1706.03762.pdf).
+
+<div class="imgcap">
+<img src="/assets/bert/transformer-architecture.png">
+<div class="thecap">The model architecture of Transformer.</div>
+</div>
+
+The sequential nature of Recurrent models (RNN, LSTM) causes that the parallel computation can't be exploited within the training examples,
+and the memory constraints limit the batching across training examples as the length of sequence becomes longer. 
+
+The Transformer substitutes the traditional attention mechanism using recurrent or convolutional neural networks in encoder and decoder with 
+the simple self-attention mechanism in the task - machine translation.
+It allows for significantly more parallelization with the help of **multi-headed self-attention mechanism**, in addition, it can also learn long-range dependency.
+
+<div class="imgcap">
+<img src="/assets/bert/self-attention.png">
+<div class="thecap">The computation flow of single self-attention.</div>
+</div>
+
+The Transformer makes use of multi-headed self-attention to improve the performance of attention layer by concatenation of multi self-attention output result. Multi-head attention allows the model to jointly attend to information from different representation
+subspaces at different positions. In the decoder, We only need to keep leftward information flow of current input word by masking out all values in the input of the softmax which correspond to illegal connections.
+
+Since our model contains no recurrence and no convolution, in order for the model to make use of the
+order of the sequence, we must inject some information about the relative or absolute position of the tokens in the sequence.
+we add **positional encoding** to the input embeddings at the bottoms of the encoder and decoder stacks.
+
+
+### 4.GPT
 
 
 
-### 4.BERT
+### 5.BERT
 
 
 
-### 5.ERNIE
+### 6.ERNIE
 
 
 
 
 
-### 6.Reference
+### 7.Reference
 
 [Word2vec](https://www.tensorflow.org/tutorials/text/word2vec)
 
 [ELMo](https://allennlp.org/elmo)
 
 [BERT,ELMo](http://jalammar.github.io/illustrated-bert/)
+
+[Transformer](https://jalammar.github.io/illustrated-transformer/)
+
+[official implementation of Transformer based on tensor2tensor](https://github.com/tensorflow/tensor2tensor/blob/master/tensor2tensor/models/transformer.py)
+
+[implementation of Transformer based on Tensorflow](https://github.com/tensorflow/models/tree/master/official/nlp/transformer)
+
+[GPT-2](http://jalammar.github.io/illustrated-gpt2/)
+
+[huggingface-transformers](https://github.com/huggingface/transformers)
+
+
 
 
