@@ -53,13 +53,16 @@ the word vocabulary for the Softmax function . To cope with this disadvantage, *
 some negative samples for the input word according to one noise distribution instead of using all the words in the vocabulary to reduce the computation cost.
 
 After training, the vector representation of the words with similar semantic meaning will be more close, in contrast, the vector representation of the words with different semantic meaning will be less similar.
-- One problem is: there is one **fixed vector representation** for one word, so it is not suitable for **synonym word (polysemy)**,
-- another is: Word2Vec takes less contextual information of current word into consideration, the representation is a little **shallow**,
 
 <div class="imgcap">
 <img src="/assets/bert/word2vec-ret.png">
 <div class="thecap">The illustration of word embedding for some kind of words .</div>
 </div>
+
+But, there are some problems that restricts the performance of Word2Vec.
+
+- One is: there is one **fixed vector representation** for one word, so it is not suitable for **synonym word (polysemy)**,
+- another is: Word2Vec takes less contextual information of current word into consideration, the representation is a little **shallow**,
 
 ### 2.ELMo
 
