@@ -195,7 +195,79 @@ The fine-tuning process of BERT on the downstream NLP tasks:
 <div class="thecap">The fine-tuning process of BERT.</div>
 </div>
 
-### 6.ERNIE
+### 6.XLNet
+
+An **auto-regressive (AR) language model** such as GPT is only trained to encode a **uni-directional** context (either forward or backward),
+AR language modeling performs pre-training by maximizing the likelihood under the forward auto-regressive factorization.
+It is not effective at modeling deep bidirectional contexts.
+however, downstream language understanding tasks often require bidirectional context information. This causes a gap between AR pre-training and subsequent fine-tuning process.
+
+An **auto-encoding (AE) language model** such as BERT aims to reconstruct the original data from corrupted input.
+BERT assumes that the predicted tokens are independent of each other given the unmasked tokens.
+This suffers from a **discrepancy between pre-training and fine-tuning** because of the mask strategy in training. 
+
+Taking the pros and cons of above two methods, **XLNet** was proposed, it is a **permutation-based auto-regressive pre-training** method to combine the advantages of AR and AE methods, which enables
+**learning bidirectional contexts by maximizing the expected likelihood over all possible permutations of the factorization order**.
+It overcomes the limitations of BERT and eliminates the independence assumption made in BERT thanks to the auto-regressive formulation.
+Owing to the permutation operation, the context for each position can consist of tokens from both left and right, which overcomes the limitation of GPT.
+
+The detailed illustration of **two-stream self-attention for the target-aware representation**:
+
+<div class="imgcap">
+<img src="/assets/bert/xlnet-two-stream.png">
+<div class="thecap">The detailed illustration of two-stream self-attention.</div>
+</div>
+
+Query stream and content stream have a shared set of parameters as follows:
+
+computation of query stream:
+
+$$
+\begin{equation}
+g_{z_t}^{(m)} = Attention(Q = g_{z_t}^{(m - 1)}, \textbf{KV} = \textbf{h}_{z < t}^{(m-1)};\theta) 
+\end{equation}
+$$
+
+computation of content stream:
+
+$$
+\begin{equation}
+h_{z_t}^{(m)} = Attention(Q = g_{z_t}^{(m - 1)}, \textbf{KV} = \textbf{h}_{z \leq t}^{(m-1)};\theta) 
+\end{equation}
+$$
+
+During fine-tuning, we can simply drop the query stream and use the content stream as a normal Transformer.
+
+The Illustration of the permutation language modeling objective for predicting \\( x_3 \\) given the
+same input sequence \\( x \\) but with different factorization orders.
+
+<div class="imgcap">
+<img src="/assets/bert/xlnet-permutation.png">
+<div class="thecap">The different factorization orders for one position of sequence.</div>
+</div>
+
+The detailed illustration of **content stream**:
+
+<div class="imgcap">
+<img src="/assets/bert/xlnet-content-stream.png">
+<div class="thecap">The detailed illustration of content stream.</div>
+</div>
+
+The detailed illustration of **query stream**:
+
+<div class="imgcap">
+<img src="/assets/bert/xlnet-query-stream.png">
+<div class="thecap">The detailed illustration of query stream.</div>
+</div>
+
+The main difference is that the query stream cannot do self-attention and does not have access
+to the token at the position, while the content stream performs normal self-attention.
+
+XLNet also integrate two important techniques in **Transformer-XL**, namely the **relative positional encoding**
+scheme and the **segment recurrence mechanism**. In addition, XLNet-Large does not use the objective of next sentence
+prediction. While BERT uses the absolute segment embedding, XLNet uses the **relative segment encoding**.
+
+### 7.ERNIE
 
 **Enhanced Representation from kNowledge IntEgration (ERNIE)** is designed to learn language representation enhanced by **knowledge masking strategies**, 
 which includes **entity-level masking** and **phrase-level masking**. Entity-level strategy masks entities which are usually composed of multiple words. 
@@ -251,7 +323,7 @@ Whenever a new task comes, the continual multi-task learning method first uses t
 and then train the newly-introduced task together with the original tasks simultaneously **by automatically allocating each task N
 training iterations to the different stages of training**.
 
-### 7.Reference
+### 8.Reference
 
 [Word2vec](https://www.tensorflow.org/tutorials/text/word2vec)
 
@@ -268,6 +340,8 @@ training iterations to the different stages of training**.
 [GPT-2](http://jalammar.github.io/illustrated-gpt2/)
 
 [huggingface-transformers](https://github.com/huggingface/transformers)
+
+[XLNet](https://github.com/zihangdai/xlnet)
 
 [ERNIE](https://github.com/PaddlePaddle/ERNIE)
 
