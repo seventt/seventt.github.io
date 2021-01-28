@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "pre-training model in NLP"
-excerpt: "from word embeddings to pre-training model based on large-scale data set to better capture and represent the contextual information including Word2Vec, ELMo, Transformer, GPT, BERT, XLNet and ERNIE"
+excerpt: "from word embeddings to pre-training model based on large-scale data set to better capture and represent the contextual information including Word2Vec, ELMo, Transformer, Transformer-XL, GPT, BERT, XLNet and ERNIE"
 date:   2021-01-27 17:00:00
 mathjax: true
 ---
@@ -110,7 +110,8 @@ and the memory constraints limit the batching across training examples as the le
 
 The Transformer substitutes the traditional attention mechanism using recurrent or convolutional neural networks in encoder and decoder with 
 the simple **multi-head self-attention mechanism** in the task - machine translation.
-It allows for significantly **more parallelization** for the single training example with the help of multi-headed self-attention mechanism, in addition, it can also learn **long-range dependency**.
+It allows for significantly **more parallelization** for the single training example with the help of multi-headed self-attention mechanism, 
+in addition, it can also learn **long-range dependency**.
 
 <div class="imgcap">
 <img src="/assets/bert/self-attention.png">
@@ -124,7 +125,86 @@ Since our model contains no recurrence and no convolution, in order for the mode
 order of the sequence, we must inject some information about the relative or absolute position of the tokens in the sequence.
 we add **positional encoding** to the input embeddings at the bottoms of the encoder and decoder stacks.
 
-### 4.GPT
+### 4.Transformer-XL
+
+The central problem of language modelling is how to train a Transformer to **effectively encode an arbitrarily long context into a fixed size representation**.
+Given infinite memory and computation, a simple solution would be to process the entire context sequence using an unconditional Transformer decoder.
+However, this is usually infeasible with the limited resource in practice
+
+The **vanilla Transformers** are currently implemented with a **predefined fixed-length segment context**, i.e. a long text sequence is truncated into fixed-length segments of a few hundred characters, and each segment is processed separately.
+and only train the model within each segment, ignoring all contextual information from previous segments.
+Under this training paradigm, **information never flows across segments** in either the forward or backward pass.
+Chunking simply a sequence into fixed-length segments will lead to the **context fragmentation problem**.
+
+The Vanilla Transformer with fixed-length context at training time:
+
+<div class="imgcap">
+<img src="/assets/bert/xl-fixed.gif">
+<div class="thecap">The Vanilla Transformer with fixed-length context at training time.</div>
+</div>
+
+During evaluation, at each step, the vanilla model also consumes a segment of the same length as in training, but only makes one prediction at the last position. 
+Then, at the next step, the segment is shifted to the right by only one position, 
+and the new segment has to be processed all from scratch。this evaluation procedure is extremely
+expensive。
+
+The Vanilla Transformer with fixed-length context at evaluation time:
+
+<div class="imgcap">
+<img src="/assets/bert/transformer-at-eval.gif">
+<div class="thecap">The Vanilla Transformer with fixed-length context at evaluation time.</div>
+</div>
+
+As a result, it is not able to model dependencies that are longer than a fixed length. In addition,
+The segments usually do not respect the sentence boundaries, resulting in context fragmentation which leads to inefficient optimization
+
+So the **Transformer-XL** was proposed to address these issues by enabling network to learn beyond a fixed-length context. Transformer-XL consists of two techniques: 
+
+- **a segment-level recurrence mechanism** 
+- **a relative positional encoding scheme**
+
+Segment-level Recurrence:
+
+During training, the representations computed for the previous segment are **fixed and cached to be reused as an extended context when the model processes the next new segment**. 
+This additional connection increases the largest possible dependency length by \\( N \\) times, where \\( N \\) is the depth of the network, because contextual information is now able to flow across segment boundaries.
+The critical **difference** lies in that the key vector \\( k_{\tau + 1}^{n} \\) of \\( n-th \\) layer for current segment \\( \tau + 1 \\) and value vector \\( v_{\tau + 1}^{n} \\) of \\( n-th \\) layer for current segment \\( \tau + 1 \\) are conditioned on **the extended context** \\( \tilde{h_{\tau + 1}^{n - 1}} \\) of \\( (n-1)-th \\) layer for current segment \\( \tau + 1 \\) and hence \\( h_{\tau}^{n - 1} \\) ( the hidden vector of \\( (n-1)-th \\) layer for previous segment cached \\( \tau \\) ).
+
+The Transformer-XL with segment-level recurrence at training time:
+
+<div class="imgcap">
+<img src="/assets/bert/xl-segment.gif">
+<div class="thecap">The Transformer-XL with segment-level recurrence at training time.</div>
+</div>
+
+Specifically, during evaluation, the representations from the previous segments can be reused instead of being computed from scratch as in the case of the vanilla model,
+which leads to a faster evaluation.
+
+The Transformer-XL with segment-level recurrence at evaluation time:
+
+<div class="imgcap">
+<img src="/assets/bert/xl-at-eval.gif">
+<div class="thecap">The Transformer-XL with segment-level recurrence at evaluation time.</div>
+</div>
+
+Relative Positional Encodings:
+
+If we use the absolute positional encoding as in the Transformer, it will lose information to distinguish the positional difference between the different segments. To avoid this problem, the relative positional encoding is applied.
+There is no need for query vector to know the absolute position of each key vector to identify the temporal order of the segment. 
+
+The computational procedure for a \\( N-layer\\) Transformer-XL with a single attention head. For \\( n = 1, \cdots ,N\\):
+
+<div class="imgcap">
+<img src="/assets/bert/xl-computation.png">
+<div class="thecap">The computation of Transformer-XL.</div>
+</div>
+
+The advantages of Transformer-XL are:
+
+- Transformer-XL learns dependency that is about 80% longer than RNNs and 450% longer than vanilla Transformers.
+- Transformer-XL is up to \\( 1,800+ \\) times faster than a vanilla Transformer during evaluation on language modeling tasks, because no re-computation is needed.
+- reduced perplexity.
+
+### 5.GPT
 
 **GPT (Generative Pre-trained Transformer)** is a unsupervised pre-training model trained on enormous, diverse and unlabelled corpus of text to further improve the natural language understanding performance in NLP, 
 followed by discriminative fine-tuning on each specific downstream task.
@@ -161,7 +241,7 @@ The process of fine-tuning is as follows:
 <div class="thecap">The fine-tuning process of GPT.</div>
 </div>
 
-### 5.BERT
+### 6.BERT
 
 **BERT (Bidirectional Encoder Representation from Transformers)** is based on the **Transformer Encoder Block** unlike GPT. 
 It also uses the framework of unsupervised pra-training with large-scale unlabelled datasets and subsequent supervised fine-tuning on the specific downstream NLP tasks. 
@@ -195,7 +275,7 @@ The fine-tuning process of BERT on the downstream NLP tasks:
 <div class="thecap">The fine-tuning process of BERT.</div>
 </div>
 
-### 6.XLNet
+### 7.XLNet
 
 An **auto-regressive (AR) language model** such as GPT is only trained to encode a **uni-directional** context (either forward or backward),
 AR language modeling performs pre-training by maximizing the likelihood under the forward auto-regressive factorization.
@@ -267,7 +347,7 @@ XLNet also integrate two important techniques in **Transformer-XL**, namely the 
 scheme and the **segment recurrence mechanism**. In addition, XLNet-Large does not use the objective of next sentence
 prediction. While BERT uses the absolute segment embedding, XLNet uses the **relative segment encoding**.
 
-### 7.ERNIE
+### 8.ERNIE
 
 **Enhanced Representation from kNowledge IntEgration (ERNIE)** is designed to learn language representation enhanced by **knowledge masking strategies**, 
 which includes **entity-level masking** and **phrase-level masking**. Entity-level strategy masks entities which are usually composed of multiple words. 
@@ -323,7 +403,7 @@ Whenever a new task comes, the continual multi-task learning method first uses t
 and then train the newly-introduced task together with the original tasks simultaneously **by automatically allocating each task N
 training iterations to the different stages of training**.
 
-### 8.Reference
+### 9.Reference
 
 [Word2vec](https://www.tensorflow.org/tutorials/text/word2vec)
 
@@ -336,6 +416,8 @@ training iterations to the different stages of training**.
 [official implementation of Transformer based on tensor2tensor](https://github.com/tensorflow/tensor2tensor/blob/master/tensor2tensor/models/transformer.py)
 
 [implementation of Transformer based on Tensorflow](https://github.com/tensorflow/models/tree/master/official/nlp/transformer)
+
+[Transformer-XL](https://ai.googleblog.com/2019/01/transformer-xl-unleashing-potential-of.html)
 
 [GPT-2](http://jalammar.github.io/illustrated-gpt2/)
 
