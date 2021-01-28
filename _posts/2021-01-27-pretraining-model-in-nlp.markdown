@@ -2,7 +2,7 @@
 layout: post
 title:  "pre-training model in NLP"
 excerpt: "from word embeddings to pre-training model based on large-scale data set to better capture and represent the contextual information including Word2Vec, ELMo, Transformer, Transformer-XL, GPT, BERT, XLNet and ERNIE"
-date:   2021-01-27 17:00:00
+date:   2021-01-28 17:00:00
 mathjax: true
 ---
 
