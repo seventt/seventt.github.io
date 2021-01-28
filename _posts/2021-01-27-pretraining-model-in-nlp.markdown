@@ -167,7 +167,7 @@ Segment-level Recurrence:
 
 During training, the representations computed for the previous segment are **fixed and cached to be reused as an extended context when the model processes the next new segment**. 
 This additional connection increases the largest possible dependency length by \\( N \\) times, where \\( N \\) is the depth of the network, because contextual information is now able to flow across segment boundaries.
-The critical **difference** lies in that the key vector \\( k_{\tau + 1}^{n} \\) of \\( n-th \\) layer for current segment \\( \tau + 1 \\) and value vector \\( v_{\tau + 1}^{n} \\) of \\( n-th \\) layer for current segment \\( \tau + 1 \\) are conditioned on **the extended context** \\( \tilde{h_{\tau + 1}^{n - 1}} \\) of \\( (n-1)-th \\) layer for current segment \\( \tau + 1 \\) and hence \\( h_{\tau}^{n - 1} \\) ( the hidden vector of \\( (n-1)-th \\) layer for previous segment cached \\( \tau \\) ).
+The critical **difference** lies in that the key vector \\( k_{\tau+1}^{n} \\) of \\( n\text{th} \\) layer for current segment \\( \tau+1 \\) and value vector \\( v_{\tau+1}^{n} \\) of \\( n\text{th} \\) layer for current segment \\( \tau+1 \\) are conditioned on **the extended context** \\( \tilde{h_{\tau+1}^{n-1}} \\) of \\( (n-1)\text{th} \\) layer for current segment \\( \tau+1 \\) and hence \\( h_{\tau}^{n-1} \\) ( the hidden vector of \\( (n-1)\text{th} \\) layer for previous cached segment \\( \tau \\) ).
 
 The Transformer-XL with segment-level recurrence at training time:
 
@@ -177,7 +177,7 @@ The Transformer-XL with segment-level recurrence at training time:
 </div>
 
 Specifically, during evaluation, the representations from the previous segments can be reused instead of being computed from scratch as in the case of the vanilla model,
-which leads to a faster evaluation.
+which leads to a **faster evaluation**.
 
 The Transformer-XL with segment-level recurrence at evaluation time:
 
@@ -191,7 +191,7 @@ Relative Positional Encodings:
 If we use the absolute positional encoding as in the Transformer, it will lose information to distinguish the positional difference between the different segments. To avoid this problem, the relative positional encoding is applied.
 There is no need for query vector to know the absolute position of each key vector to identify the temporal order of the segment. 
 
-The computational procedure for a \\( N-layer\\) Transformer-XL with a single attention head. For \\( n = 1, \cdots ,N\\):
+The computational procedure for a \\( N\text{-layer}\\) Transformer-XL with a single attention head. For \\( n = 1, \cdots ,N\\):
 
 <div class="imgcap">
 <img src="/assets/bert/xl-computation.png">
