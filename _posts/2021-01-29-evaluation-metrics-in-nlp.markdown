@@ -37,7 +37,7 @@ It may be used to compare probability models. A low perplexity indicates the pro
 
 $$
 \begin{equation}
-PP (p) = 2^{H(p)} = 2 ^ {- \sum_{x} p(x) \log{2}{p(x)}}
+PP (p) = 2^{H(p)} = 2 ^ {- \sum_{x} p(x) \log_{2} p(x)}
 \end{equation}
 $$
 
