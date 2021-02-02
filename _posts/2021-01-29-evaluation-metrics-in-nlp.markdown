@@ -33,7 +33,8 @@ It compares the automatically produced result against a or a set of human-produc
 ### 3.Perplexity
 
 In information theory, perplexity is a measurement of how well a probability distribution or probability model predicts a sample. 
-It may be used to compare probability models. A low perplexity indicates the probability distribution is good at predicting the sample.
+It may be used to compare probability models. A low perplexity indicates the probability distribution is good at predicting the sample in the test set.
+
 
 $$
 \begin{equation}
@@ -42,6 +43,12 @@ PP (p) = 2^{H(p)} = 2 ^ {- \sum_{x} p(x) \log_{2} p(x)}
 $$
 
 In NLP, perplexity is a way of evaluating language model. A language model is a probability distribution over entire sentences or texts.
+The perplexity of the model over the test sentence \\( S \\) is: 
+$$
+\begin{equation}
+perplexity (S) = p(w_1,w_2,\cdots,w_m) ^ {\frac{-1}{m}} = \sqrt[m]{\prod_{i=1}^{m} \frac{1}{p(w_i|w_1,w_2,\cdots,w_{i-1})}}
+\end{equation}
+$$
 
 ### 4.Reference
 
