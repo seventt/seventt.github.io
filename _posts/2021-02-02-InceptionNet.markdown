@@ -12,7 +12,7 @@ The architecture of GoogLeNet is designed carefully to achieve the better utiliz
 the depth and the width of network while keeping the computational budget constant and the improved performance of model . 
 
 <div class="imgcap">
-<img src="/assets/inception/googenet.png">
+<img src="/assets/inception/googlenet.png">
 <div class="thecap">The Architecture of GoogLeNet.</div>
 </div>
 
