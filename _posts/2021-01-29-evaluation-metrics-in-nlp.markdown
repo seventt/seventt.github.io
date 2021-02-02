@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "evaluation metrics in NLP"
-excerpt: "common evaluation metrics in NLP: BLEU, ROUGE, Perplexity"
+title:  "evaluation metrics in language model"
+excerpt: "common evaluation metrics in language model: BLEU, ROUGE, Perplexity"
 date:   2021-02-01 17:00:00
 mathjax: true
 ---
