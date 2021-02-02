@@ -44,6 +44,7 @@ $$
 
 In NLP, perplexity is a way of evaluating language model. A language model is a probability distribution over entire sentences or texts.
 The perplexity of the model over the test sentence \\( S \\) is: 
+
 $$
 \begin{equation}
 perplexity (S) = p(w_1,w_2,\cdots,w_m) ^ {\frac{-1}{m}} = \sqrt[m]{\prod_{i=1}^{m} \frac{1}{p(w_i|w_1,w_2,\cdots,w_{i-1})}}
